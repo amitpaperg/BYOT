@@ -6,16 +6,17 @@ TODO:
 2. Get ads
 3. make event based (remove wait)
 *****************************************/
-
+var numAds = 0;
 function OnLoadPage_Main()
 {
 	// applied only if entity pane exists
 	if (!isTriggerExist())
 		return;
 
-	// load Data
-	LoadData();
-	
+	// TODO: remove delay of 20 seconds for ads to load
+	// TODO: move to event based on button click
+	setTimeout(LoadData(),20000);
+
 	// Main
 	ModifyUX();
 }
@@ -37,7 +38,8 @@ function addOverlays(elms, width, height) {
 		}
 
 		arrOverlayPos.push(pos);
-		var overlayNode = '<div class="placelocalOverLay placelocal'+width+'x'+height+'" style="left: '
+		numAds++; // increment ads found
+		var overlayNode = '<div class="byotBgColor byotOverLay byotlocal'+width+'x'+height+'" style="left: '
 			+ pos.left +'px; top: '+ pos.top +'px; width: '+ width +'px; height: '+ height +'px;"> </div>';
 		
 		// Two choices on where to place overlay
@@ -70,7 +72,14 @@ function findAds() {
 		return ($(this).outerWidth() == 160 && $(this).outerHeight() == 600);
 	});
 	addOverlays(elms160,160,600);
+
+	// show message
+	$("body").append("<div id='byotMsg' class='byotBgColor'></div>");
+	$('#byotMsg').html('found '+numAds+' ads on this page.');
+	$('#byotMsg').fadeIn().delay(5000).fadeOut();
 	
+	// show overlays
+	$('.byotOverLay').delay(1000).fadeIn('fast');
 }
 
 // check if a condition is true
@@ -85,9 +94,9 @@ function LoadData() {
 
 function ModifyUX() {
 	
-	$( ".placelocalOverLay" ).hover(
+	$( ".byotOverLay" ).hover(
 	  function() {
-	    $( this ).html("<div class='placelocalOlText'><span class='placelocalOlTextHL'>Click</span> to show ad. Then, <span class='placelocalOlTextHL'>Drag</span> to reposition</div>");
+	    $( this ).html("<div class='byotOverlayText'><span class='byotTextHL'>Click</span> to show ad. Then, <span class='byotTextHL'>Drag</span> to reposition</div>");
 	  }, function() {
 	    $( this ).html("");
 	  }
