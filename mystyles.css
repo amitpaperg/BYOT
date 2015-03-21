@@ -1,0 +1,46 @@
+/* add CSS styles here */
+.placelocalHover {
+	border: solid 3px red;
+}
+
+.placelocalMarked {
+	outline: solid 6px rgba(255,0,0,0.5);
+	outline-offset: -4px;
+}
+
+.placelocalOverLay {
+	position: absolute;
+	z-index: 99999 !important;
+	background-color: #c13;
+	-webkit-background-size: 50px 50px;
+	-moz-background-size: 50px 50px;
+	background-size: 50px 50px;
+	background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent), to(transparent));
+	background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+	background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+	background-image: -ms-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+	background-image: -o-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+	background-image: linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+	opacity: 0.6;
+}
+
+.placelocalOverLay:hover {
+	opacity: 1;
+}
+
+.placelocalOlText {
+  color: lightyellow;
+  font-size: 24px;
+  margin-left: 30px;
+  margin-right: 30px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: "Arial Black", Gadget, sans-serif;
+  line-height: initial;
+  text-align: center;
+}
+
+.placelocalOlTextHL {
+	color: yellow;
+}
