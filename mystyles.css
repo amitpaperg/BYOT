@@ -1,9 +1,16 @@
 /* add CSS styles here */
 .byotOverLay {
-	position: absolute;
 	display: none;
-	z-index: 999999998 !important;
 	opacity: 0.6;
+}
+
+.byotAdPreview {
+	border: 1px solid Black;
+}
+
+.byotOverLay, .byotAdPreview {
+	position: absolute;
+	z-index: 999999998 !important;
 }
 
 .byotOverLay:hover {

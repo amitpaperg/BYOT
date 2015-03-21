@@ -39,8 +39,11 @@ function addOverlays(elms, width, height) {
 
 		arrOverlayPos.push(pos);
 		numAds++; // increment ads found
-		var overlayNode = '<div class="byotBgColor byotOverLay byotlocal'+width+'x'+height+'" style="left: '
-			+ pos.left +'px; top: '+ pos.top +'px; width: '+ width +'px; height: '+ height +'px;"> </div>';
+		var overlayNode = '<div class="byotBgColor byotOverLay byot'+width+'x'+height+'" style="left: '
+			+ pos.left +'px; top: '+ pos.top +'px; width: '+ width +'px; height: '+ height +'px;"> \
+			 <div class="byotOverlayText"><span class="byotTextHL">Click</span> to show ad. Then, <span\
+			 class="byotTextHL">Drag</span> to reposition</div>\
+			</div>';
 		
 		// Two choices on where to place overlay
 		//$(val).parent().append(overlayNode);
@@ -93,14 +96,16 @@ function LoadData() {
 }
 
 function ModifyUX() {
-	
-	$( ".byotOverLay" ).hover(
-	  function() {
-	    $( this ).html("<div class='byotOverlayText'><span class='byotTextHL'>Click</span> to show ad. Then, <span class='byotTextHL'>Drag</span> to reposition</div>");
-	  }, function() {
-	    $( this ).html("");
-	  }
-	);
+	$(".byot300x250").click(function(){
+		$(this).removeClass('byotOverLay byotBgColor').addClass('byotAdPreview');
+
+		// TODO: get ad tag from the service
+		var adUrl = "http://api.zolotov.capture.dev.paperg.com:5000/captures/vasili-test/test-id-20/video/pause/seconds/2/png";
+		$(this).html('<div><img src="'+adUrl+'"/></div>');
+
+		// hide other placeholders
+		$('.byotOverLay').fadeOut();
+	});
 }
 /*
 chrome.browserAction.onClicked.addListener(function() {
