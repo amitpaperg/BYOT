@@ -6,6 +6,7 @@
 
 .byotAdPreview {
 	border: 1px solid Black;
+	cursor: move;
 }
 
 .byotOverLay, .byotAdPreview {

@@ -103,6 +103,9 @@ function ModifyUX() {
 		var adUrl = "http://api.zolotov.capture.dev.paperg.com:5000/captures/vasili-test/test-id-20/video/pause/seconds/2/png";
 		$(this).html('<div><img src="'+adUrl+'"/></div>');
 
+		// allow the ad preview to be moved
+		$( ".byotAdPreview" ).draggable({ opacity: 0.6, cursor: "move", cursorAt: { top: 125, left: 150 } });
+
 		// hide other placeholders
 		$('.byotOverLay').fadeOut();
 	});
