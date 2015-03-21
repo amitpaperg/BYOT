@@ -1,13 +1,4 @@
 /* add CSS styles here */
-.placelocalHover {
-	border: solid 3px red;
-}
-
-.placelocalMarked {
-	outline: solid 6px rgba(255,0,0,0.5);
-	outline-offset: -4px;
-}
-
 .placelocalOverLay {
 	position: absolute;
 	z-index: 99999 !important;
