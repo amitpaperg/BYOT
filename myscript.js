@@ -39,11 +39,14 @@ function addOverlays(elms, width, height) {
 
 		arrOverlayPos.push(pos);
 		numAds++; // increment ads found
-		var overlayNode = '<div class="byotBgColor byotOverLay" style="left: '
+		var overlayNode = $('<div class="byotBgColor byotOverLay" style="left: '
 			+ pos.left +'px; top: '+ pos.top +'px; width: '+ width +'px; height: '+ height +'px;"> \
 			 <div class="byotOverlayText"><span class="byotTextHL">Click</span> to show ad. Then, <span\
 			 class="byotTextHL">Drag</span> to reposition</div>\
-			</div>';
+			</div>');
+
+		$(overlayNode).data('adWidth',width);
+		$(overlayNode).data('adHeight',height);
 		
 		// Two choices on where to place overlay
 		//$(val).parent().append(overlayNode);
@@ -151,7 +154,7 @@ function ModifyUX() {
 		$(this).removeClass('byotOverLay byotBgColor').addClass('byotAdPreview');
 
 		var transparentDiv = "<div class='transparentOverlay'></div>";
-		var adTag = GetAdTag($(this).width());
+		var adTag = GetAdTag($(this).data('adWidth'));
 
 		$(this).html(adTag + transparentDiv);
 
