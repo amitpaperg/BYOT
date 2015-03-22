@@ -103,8 +103,50 @@ function ModifyUX() {
 		var adUrl = "http://api.zolotov.capture.dev.paperg.com:5000/captures/vasili-test/test-id-20/video/pause/seconds/2/png";
 		$(this).html('<div><img src="'+adUrl+'"/></div>');
 
-		// allow the ad preview to be moved
-		$( ".byotAdPreview" ).draggable({ opacity: 0.6, cursor: "move", cursorAt: { top: 125, left: 150 } });
+		// allow the ad preview to be moved using mouse
+		$( ".byotAdPreview" )
+		.draggable(
+			{ 
+				opacity: 0.6, 
+				cursor: "move", 
+				cursorAt: { top: 125, left: 150 } 
+			}
+		);
+
+		// support key stokes to move ad precisely
+		$('body').on("keydown",function( event ) {
+			// nothing to do if ad has not been inserted yet
+			if ($(".byotAdPreview").length < 1) {
+				return;
+			}
+
+			// set amount of pixels to move
+			var shiftByPixels = 5;
+			if (event.shiftKey) {
+				shiftByPixels = 25;
+			} else if (event.ctrlKey || event.metaKey) {
+				shiftByPixels = 1;
+			}
+
+			// move ad
+			  if ( event.which == 37 ) {
+			  	// left key	
+			   	event.preventDefault();
+			   	$(".byotAdPreview").css('left',($(".byotAdPreview").offset().left-shiftByPixels)+'px');
+			  } else if ( event.which == 38 ) {
+			  	// up key
+			   	event.preventDefault();
+			   	$(".byotAdPreview").css('top',($(".byotAdPreview").offset().top-shiftByPixels)+'px');
+			  } else if ( event.which == 39 ) {
+			  	// right key
+			   	event.preventDefault();
+			   	$(".byotAdPreview").css('left',($(".byotAdPreview").offset().left+shiftByPixels)+'px');
+			  } else if ( event.which == 40 ) {
+			  	// down key
+			   	event.preventDefault();
+			   	$(".byotAdPreview").css('top',($(".byotAdPreview").offset().top+shiftByPixels)+'px');
+			  }
+		});
 
 		// hide other placeholders
 		$('.byotOverLay').fadeOut();
