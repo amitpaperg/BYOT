@@ -1,13 +1,13 @@
 {
-  "name": "PlaceLocal BYOT",
-  "version": "0.1",
+  "name": "PlaceLocal - Ad Preview Extension",
+  "version": "0.2",
   "manifest_version": 2,
-  "description": "Build Your Own Tearsheets - show placelocal ads on page and capture eTearsheets",
+  "description": "See how your ad looks on any website and take a screenshot",
   "browser_action": {
     "default_icon": {                    // optional
       "19": "images/icon19.png"
     },
-    "default_title": "PlaceLocal BYOT"
+    "default_title": "PlaceLocal Ad Preview"
   },
   "content_scripts": [
     {
