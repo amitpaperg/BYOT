@@ -39,7 +39,7 @@ function addOverlays(elms, width, height) {
 
 		arrOverlayPos.push(pos);
 		numAds++; // increment ads found
-		var overlayNode = '<div class="byotBgColor byotOverLay byot'+width+'x'+height+'" style="left: '
+		var overlayNode = '<div class="byotBgColor byotOverLay" style="left: '
 			+ pos.left +'px; top: '+ pos.top +'px; width: '+ width +'px; height: '+ height +'px;"> \
 			 <div class="byotOverlayText"><span class="byotTextHL">Click</span> to show ad. Then, <span\
 			 class="byotTextHL">Drag</span> to reposition</div>\
@@ -95,21 +95,72 @@ function LoadData() {
 	findAds();
 }
 
+// TODO: get ad tag from service
+function GetAdTag(size) {
+	if (size == 728) {
+		GetAdTag = "<iframe frameborder='0'\
+        scrolling='no'\
+        marginwidth='0'\
+        marginheight='0'\
+        width='728'\
+        height='90'\
+        \
+		src='http://ak-cdn.placelocal.com/js/v3/iframetag?creativeUrl=http%3A%2F%2Fcreative.placelocal.com%2Fv3.placelocal.com%2F19062476-ad62-11e4-9768-002590592b46%2Fleaderboard.js&campaignID=445831&dimension_name=leaderboard&domain_name=ak-cdn.placelocal.com&tracking_url=tracking.placelocal.com&clickTag=&random=&animationTime=0&landing_page=http%3A%2F%2Fwww.laboulangebakery.com'>\
+		    <a href='http://tracking.placelocal.com/click?campaign_id=445831&dimension_name=leaderboard&random=&url=http%3A%2F%2Fwww.laboulangebakery.com' target='_blank' style='display:inline-block'>\
+		        <img src='http://ak-cdn.placelocal.com/backup_image.php?campaign_id=445831&width=728&height=90' border='0' />\
+		    </a>\
+		    <img src='http://tracking.placelocal.com/pixel?campaign_id=445831&dimension_name=leaderboard&random=' border='0' style='display:none' />\
+		\
+		</iframe>";
+	} else if (size == 160) {
+		GetAdTag = "<iframe frameborder='0'\
+        scrolling='no'\
+        marginwidth='0'\
+        marginheight='0'\
+        width='160'\
+        height='600'\
+		\
+        src='http://ak-cdn.placelocal.com/js/v3/iframetag?creativeUrl=http%3A%2F%2Fcreative.placelocal.com%2Fv3.placelocal.com%2F19062476-ad62-11e4-9768-002590592b46%2Fskyscraper.js&campaignID=445831&dimension_name=skyscraper&domain_name=ak-cdn.placelocal.com&tracking_url=tracking.placelocal.com&clickTag=&random=&animationTime=0&landing_page=http%3A%2F%2Fwww.laboulangebakery.com'>\
+		    <a href='http://tracking.placelocal.com/click?campaign_id=445831&dimension_name=skyscraper&random=&url=http%3A%2F%2Fwww.laboulangebakery.com' target='_blank' style='display:inline-block'>\
+		        <img src='http://ak-cdn.placelocal.com/backup_image.php?campaign_id=445831&width=160&height=600' border='0' />\
+		    </a>\
+		    <img src='http://tracking.placelocal.com/pixel?campaign_id=445831&dimension_name=skyscraper&random=' border='0' style='display:none' />\
+		\
+		</iframe>";
+	} else {
+		GetAdTag = "<iframe frameborder='0'\
+        scrolling='no'\
+        marginwidth='0'\
+        marginheight='0'\
+        width='300'\
+        height='250'\
+		\
+        src='http://ak-cdn.placelocal.com/js/v3/iframetag?creativeUrl=http%3A%2F%2Fcreative.placelocal.com%2Fv3.placelocal.com%2F19062476-ad62-11e4-9768-002590592b46%2Fmedium_rectangle.js&campaignID=445831&dimension_name=medium_rectangle&domain_name=ak-cdn.placelocal.com&tracking_url=tracking.placelocal.com&clickTag=&random=&animationTime=0&landing_page=http%3A%2F%2Fwww.laboulangebakery.com'>\
+		    <a href='http://tracking.placelocal.com/click?campaign_id=445831&dimension_name=medium_rectangle&random=&url=http%3A%2F%2Fwww.laboulangebakery.com' target='_blank' style='display:inline-block'>\
+		        <img src='http://ak-cdn.placelocal.com/backup_image.php?campaign_id=445831&width=300&height=250' border='0' />\
+		    </a>\
+		    <img src='http://tracking.placelocal.com/pixel?campaign_id=445831&dimension_name=medium_rectangle&random=' border='0' style='display:none' />\
+		    \
+		</iframe>";
+	}
+	return GetAdTag;
+}
+
 function ModifyUX() {
-	$(".byot300x250").click(function(){
+	$(".byotOverLay").click(function(){
 		$(this).removeClass('byotOverLay byotBgColor').addClass('byotAdPreview');
 
-		// TODO: get ad tag from the service
-		var adUrl = "http://api.zolotov.capture.dev.paperg.com:5000/captures/vasili-test/test-id-20/video/pause/seconds/2/png";
-		$(this).html('<div><img src="'+adUrl+'"/></div>');
+		var transparentDiv = "<div class='transparentOverlay'></div>";
+		var adTag = GetAdTag($(this).width());
+
+		$(this).html(adTag + transparentDiv);
 
 		// allow the ad preview to be moved using mouse
 		$( ".byotAdPreview" )
 		.draggable(
 			{ 
 				opacity: 0.6, 
-				cursor: "move", 
-				cursorAt: { top: 125, left: 150 } 
+				cursor: "move"
 			}
 		);
 
